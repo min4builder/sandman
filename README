@@ -1,0 +1,15 @@
+This is a fantasy computer/console emulator based around the M68000 cpu.
+It is highly unfinished. The (planned) specs are on `SPECS`.
+The vasm(m68k) assembler is required.
+
+To build a libretro shared executable (on Linux and possibly other Unix-likes):
+
+	make
+
+A dumb typing "game" can be built and run with:
+
+	make devcart.rom
+	retroarch -L sandman-libretro.so devcart.rom
+
+"Retroarch" may be replaced with any libretro frontend.
+

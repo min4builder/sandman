@@ -1,0 +1,61 @@
+Sandman from Console Systems Inc. (CSI)
+Release date (fictional): early 1992
+
+Concept: Game console modeled after the SNES
+Also concept: something like the FDS, 64DD or Satellaview
+New concept: add programming environment for home computer stuff
+
+68000 CPU @ 12MHz 64-pin DIP
+OPL2 (YM3812) sound chip 24-pin DIP
+128KB RAM (0000:0000-0002:0000)
+PCMCIA card saves (with I/O ROM to ease part/interface switching)
+Carts are just memory mapped into the bus, with optional coprocessors
+"Goggles" graphics chip @ 12MHz (same signal as the CPU)
+	Res: from 256x240 to 512x480
+	Colors: 16-bit RGB565
+		16 colors per tile
+	Tilemap: 32KB (00f0:0000-00f0:8000)
+		1024 8x8 tiles @ 4bpp
+	VRAM: 32KB (00f0:8000-00f1:0000)
+		64x64 tile background, 4 scrolling planes
+	Sprite RAM: 4KB (00f1:0000-00f1:1000)
+		256 distorted sprites or 512 straight sprites
+	CGRAM: 1KB (00f1:8000-00f1:8400)
+		32 16-color palettes
+	Max sprites onscreen: 512
+	Max sprites per scanline: 6-126 (depends on sprite sizes and locations in table)
+	Big sprites (square only, up to 8x8 tiles)
+Controller: (00e0:0000-00e0:000a)
+	D-pad
+	4 buttons in diamond formation (ABCD)
+	2 buttons in the middle (EF)
+	Shoulders
+	Serial interface (nintendo or PS/2)
+	8 bytes + 4 interrupts + 2 type bytes
+	Buttons in controller memory: ---- LRFE DCBA ^v<>
+          L         R
+	. ^ .       D
+	< . > F E C   B
+	. v .       A
+	Keyboard: (add-on) (00e0:0000-00e0:000a)
+		Keys in controller memory: ---- ---s kkkk kkkk
+			where k is the last key changed (ASCII)
+			      s is whether k was pressed (1) or released (0)
+Full IDE in dev cartridge
+	Pallete editor
+	Tilemap editor
+	Tile editor
+	Sound editor
+	Code editor
+	High level language
+	Assembler
+	Export as cartridge (virtual cable)
+
+Emulator plan:
+CPU - Musashi
+Saves - savecart.c, libretro (the ROM is part of the emulator)
+Carts - cart.c, .sand format
+GPU - gpu.c, libretro
+Controller - controller.c, libretro
+Sound - TODO, libretro
+

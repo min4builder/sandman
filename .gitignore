@@ -1,0 +1,5 @@
+*.o
+/m68kmake
+/sandman-libretro.so
+/ior.rom
+
